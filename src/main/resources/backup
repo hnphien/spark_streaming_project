@@ -1,0 +1,94 @@
+var TOPICS: String = "XE.DEBEZIUM.PRODUCTS"
+    var DELTA_BRONZE_TABLE: String = "hdfs://127.0.0.1:9000/delta-lake/demo/poc-u11/bronze-tables/xe.products"
+    var JOIN_KEY: String = "PRODUCT_ID"
+    var SDC_COLS: String = "LIST_PRICE"
+    var UPDATE_ONLY_COLS:String = "PRODUCT_NAME"
+
+if (!DeltaTable.isDeltaTable(spark, s"$DELTA_WH/$DELTA_BRONZE_TABLE")) {
+      println("Not a delta table, creating...")
+      DeltaTable.createOrReplace(spark)
+        .addColumn("PRODUCT_ID", "STRING")
+        .addColumn("PRODUCT_NAME", "STRING")
+        .addColumn("DESCRIPTION", "STRING")
+        .addColumn("STANDARD_COST", "STRING")
+        .addColumn("LIST_PRICE", "STRING")
+        .addColumn("table", "STRING")
+        .addColumn("scn", "STRING")
+        .addColumn("op_type", "STRING")
+        .addColumn("op_ts", "STRING")
+        .addColumn("current_ts", "STRING")
+        .addColumn("row_id", "STRING")
+        .addColumn("username", "STRING")
+        .property("description", "product test table")
+        .location(s"$DELTA_WH/$DELTA_BRONZE_TABLE")
+        .execute()
+    }
+
+if (!DeltaTable.isDeltaTable(spark, s"$DELTA_WH/$DELTA_BRONZE_TABLE")) {
+      println(s"Not a delta table, creating...$DELTA_BRONZE_TABLE")
+      DeltaTable.createOrReplace(spark)
+        .addColumn("PRODUCT_ID", "STRING")
+        .addColumn("PRODUCT_NAME", "STRING")
+        .addColumn("DESCRIPTION", "STRING")
+        .addColumn("STANDARD_COST", "STRING")
+        .addColumn("LIST_PRICE", "STRING")
+        .addColumn("ActiveIndicator", BooleanType)
+        .addColumn("effectiveDate", TimestampType)
+        .addColumn("endDate", TimestampType)
+        .addColumn("Action", StringType)
+        .property("description", "product test table")
+        .location(s"$DELTA_WH/$DELTA_BRONZE_TABLE")
+        .execute()
+    }
+
+
+
+if (!DeltaTable.isDeltaTable(spark, s"$DELTA_WH/$DELTA_BRONZE_TABLE")) {
+      println(s"Not a delta table, creating...$DELTA_BRONZE_TABLE")
+      DeltaTable.createOrReplace(spark)
+        .addColumn("holding_id", IntegerType)
+        .addColumn("user_id", IntegerType)
+        .addColumn("holding_stock", StringType)
+        .addColumn("holding_quantity", IntegerType)
+        .addColumn("datetime_created", LongType)
+        .addColumn("datetime_updated", LongType)
+        .addColumn("ActiveIndicator", BooleanType)
+        .addColumn("effectiveDate", TimestampType)
+        .addColumn("endDate", TimestampType)
+        .addColumn("Action", StringType)
+        .property("description", "product test table")
+        .location(s"$DELTA_WH/$DELTA_BRONZE_TABLE")
+        .execute()
+    }
+
+if (!DeltaTable.isDeltaTable(spark, s"$DELTA_WH/$DELTA_BRONZE_TABLE")) {
+      println(s"Not a delta table, creating...$DELTA_BRONZE_TABLE")
+      DeltaTable.createOrReplace(spark)
+        .addColumn("holding_id", IntegerType)
+        .addColumn("user_id", IntegerType)
+        .addColumn("holding_stock", StringType)
+        .addColumn("holding_quantity", IntegerType)
+        .addColumn("datetime_created", TimestampType)
+        .addColumn("datetime_updated", TimestampType)
+        .addColumn("op_type", StringType)
+        .addColumn("op_ts", TimestampType)
+        .property("description", "product test table")
+        .location(s"$DELTA_WH/$DELTA_BRONZE_TABLE")
+        .execute()
+    }
+
+PRODUCT_ID,PRODUCT_NAME,DESCRIPTION,STANDARD_COST,LIST_PRICE,op_type
+159,Intel Xeon E5-269,Speed:2.6GHz,1499,1994, R
+160,Intel Xeon E5-269,Speed:2.6GHz,1540,1908, R
+161,Intel Xeon E5-269,Speed:2.6GHz,1499,1994, R
+162,Intel Xeon E5-269,Speed:2.6GHz,2000,1908, R
+163,Intel Xeon E5-269,Speed:2.6GHz,3000,2000, U
+
+
+
+    sc.addJar(s"$JARS_SPARK_PATH/kafka-clients-2.5.1.jar")
+    sc.addJar(s"$JARS_SPARK_PATH/kafka-schema-registry-client-7.0.0.jar")
+    sc.addJar(s"$JARS_SPARK_PATH/kafka-avro-serializer-7.0.0.jar")
+    sc.addJar(s"$JARS_SPARK_PATH/jackson-module-scala_2.13-2.12.5.jar")
+    sc.addJar(s"$JARS_SPARK_PATH/scala-parser-combinators_2.12-1.0.4.jar")
+    sc.addJar(s"$JARS_SPARK_PATH/spark-avro_2.12-3.1.2.jar")
