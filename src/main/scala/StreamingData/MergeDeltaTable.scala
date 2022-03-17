@@ -1,4 +1,4 @@
-package POC_U11_StreamingData
+package StreamingData
 
 import io.delta.tables.DeltaTable
 import org.apache.spark.sql.DataFrame
