@@ -1,7 +1,7 @@
-package POC_U11_StreamingData
+package StreamingData
 
-import POC_U11_StreamingData.StreamCDCToDelta.implementAllHistorical
-import POC_U11_StreamingData.TransformFunction._
+import StreamingData.StreamCDCToDelta.implementAllHistorical
+import StreamingData.TransformFunction._
 import io.delta.tables.DeltaTable
 import org.apache.spark.sql.avro.functions.from_avro
 import org.apache.spark.sql.functions._
@@ -25,7 +25,7 @@ object StreamFSOToDelta {
     /*spark session*/
     val spark = SparkSession
       .builder
-      .appName(s"Streaming POC U11")
+      .appName(s"Streaming")
       .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
       .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
       .getOrCreate()
