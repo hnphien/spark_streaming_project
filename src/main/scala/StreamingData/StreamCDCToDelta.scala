@@ -30,7 +30,7 @@ object StreamCDCToDelta {
     /*spark session*/
     val spark = SparkSession
       .builder
-      .appName(s"Streaming POC U11")
+      .appName(s"Streaming")
       .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
       .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
       .getOrCreate()
