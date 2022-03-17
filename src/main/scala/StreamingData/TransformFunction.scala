@@ -1,4 +1,4 @@
-package POC_U11_StreamingData
+package StreamingData
 
 import io.confluent.kafka.schemaregistry.ParsedSchema
 import io.confluent.kafka.schemaregistry.client.{CachedSchemaRegistryClient, SchemaMetadata}
